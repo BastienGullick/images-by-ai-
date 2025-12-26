@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ImagesBy.ai – AI Image Generator</title>
+  <meta name="description" content="Generate stunning, high-quality images using AI. Create art, illustrations, and designs instantly with ImagesBy.ai.">
+  <meta name="keywords" content="AI image generator, AI art, image generation, text to image, ImagesBy.ai">
+  <meta name="author" content="ImagesBy.ai">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+  body{
+    background-color: #111;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    margin: 0;
+  }
+  .search-box{
+    width: 500px;
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    background-color: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 15px;
+    padding: 10px;
+  }
+
+  .search-box input{
+    flex: 1;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 1rem;
+  }
+  .search-box button{
+    background-color: #00bcd4;
+    border: none;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s;
+  }
+
+  .search-box button:hover{
+    background-color: #00acc1
+  }
+
+  .result-container{
+    margin-top: 30px;
+    text-align: center;
+    width: 500px;
+    max-width: 90%;
+  }
+
+  .image-wrapper{
+    position: relative;
+    display: inline-block;
+  }
+
+  img{
+    max-width: 100%;
+    border-radius: 15px;
+  }
+
+  .icon-btns{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 6px;
+  }
+
+  .icon-btns button{
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 6px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    transition: 0.2s;
+  }
+
+  .icon-btns button:hover{
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  </style>
+</head>
+
+<body>
+  <h1>ImagesBy.Ai Image Generator</h1>
+
+  <div class="search-box">
+    <input type="text" id="prompt" placeholder="type what you want ai to generate here...">
+    <button onclick="generateImage()"><i class="fa-solid fa-caret-right"></i></button>
+  </div>
+
+  <div class="result-container" id="result">
+    <div class="image-wrapper" id="image-container">
+      <div class="icon-btns">
+        <button onclick="downloadImage()"><i class="fa-solid fa-download"></i></button>
+        <button onclick="deleteImage()"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <img id="generateImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/French_beans_J1.JPG/500px-French_beans_J1.JPG">
+    </div>
+  </div>
+
+<script>
+  function generateImage() {
+    const prompt = document.getElementById("prompt").value;
+    const img = document.getElementById("generateImage");
+
+    if (!prompt.trim()) return alert("Please type something first!");
+
+    img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
+  }
+
+  function deleteImage() {
+    const img = document.getElementById("generateImage");
+    img.src = "";
+  }
+
+  function downloadImage() {
+    const img = document.getElementById("generateImage").src;
+    if (!img) return;
+
+    const link = document.createElement("a");
+    link.href = img;
+    link.download = "image.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
+
+</body>
+</html>
