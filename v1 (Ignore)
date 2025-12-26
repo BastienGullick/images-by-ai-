@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ImagesBy.ai – AI Image Generator</title>
+  <meta name="description" content="Generate stunning, high-quality images using AI. Create art, illustrations, and designs instantly with ImagesBy.ai.">
+  <meta name="keywords" content="AI image generator, AI art, image generation, text to image, ImagesBy.ai">
+  <meta name="author" content="ImagesBy.ai">
+
+  <!-- Open Graph (Social Sharing) -->
+  <meta property="og:title" content="ImagesBy.ai – AI Image Generator">
+  <meta property="og:description" content="Turn text into stunning AI-generated images in seconds.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://imagesby.ai">
+  <meta property="og:image" content="https://imagesby.ai/og-image.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ImagesBy.ai – AI Image Generator">
+  <meta name="twitter:description" content="Create AI-generated images from simple text prompts.">
+  <meta name="twitter:image" content="https://imagesby.ai/og-image.jpg">
+
+  <!-- Performance & UX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!--Styling xd-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+  body{
+    background-color: #111;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    margin: 0;
+  }
+  .search-box{
+    width: 500px;
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    background-color: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 15px;
+    padding: 10px;
+  }
+
+  .search-box input{
+    flex: 1;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 1rem;
+  }
+  .search-box button{
+    background-color: #00bcd4;
+    borders: none;    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px; 
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s;
+  }
+ .search-box button:hover{
+   background-color: #00acc1
+     
+ }
+    
+  
+  </style>
+</head>
+<body>
+  <h1>ImagesBy.Ai Image Generator</h1>
+  <div class="search-box">
+  <input type="text" id="prompt" placeholder="type image description here">
+  <button onclick="generateImage()"><i class="fa-solid fa-caret-right"></i></i></button>
+</div>
+<div class="result-container" id="result">
+  <!--<div class="loading-text">We are Generating your image rn, it will be done soon</div>-->
+  <div class="image-wrapper" id="image-container">
+    <div class="icon-buttons">
+      <button onClick="downloadImage"><i class="fa-solid fa-download"></i></button>
+        <button onClick="deleteImage"><i class="fa-solid fa-trash"></i></button>
+    </div>
+    <img id="generateImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/French_beans_J1.JPG/500px-French_beans_J1.JPG">
+  </div>
+</div>
+</body>
+</html>
