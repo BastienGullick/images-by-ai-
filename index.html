@@ -1,152 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ImagesBy.ai – AI Image Generator</title>
-  <meta name="description" content="Generate stunning, high-quality images using AI. Create art, illustrations, and designs instantly with ImagesBy.ai.">
-  <meta name="keywords" content="AI image generator, AI art, image generation, text to image, ImagesBy.ai">
-  <meta name="author" content="ImagesBy.ai">
+<title>imagesby.ai</title>
 
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+<meta name="description" content="imagesby.ai – Fast AI image generator using Pollinations">
+<meta property="og:title" content="imagesby.ai">
+<meta property="og:description" content="Generate AI images instantly">
+<meta property="og:type" content="website">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://image.pollinations.ai">
+<link rel="dns-prefetch" href="https://image.pollinations.ai">
 
-  <style>
-  body{
-    background-color: #111;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #fff;
-    margin: 0;
-  }
-  .search-box{
-    width: 500px;
-    max-width: 90%;
-    display: flex;
-    align-items: center;
-    background-color: #1e1e1e;
-    border: 1px solid #2a2a2a;
-    border-radius: 15px;
-    padding: 10px;
-  }
-
-  .search-box input{
-    flex: 1;
-    background: none;
-    outline: none;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 15px;
-    color: #fff;
-    font-size: 1rem;
-  }
-  .search-box button{
-    background-color: #00bcd4;
-    border: none;
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: 0.2s;
-  }
-
-  .search-box button:hover{
-    background-color: #00acc1
-  }
-
-  .result-container{
-    margin-top: 30px;
-    text-align: center;
-    width: 500px;
-    max-width: 90%;
-  }
-
-  .image-wrapper{
-    position: relative;
-    display: inline-block;
-  }
-
-  img{
-    max-width: 100%;
-    border-radius: 15px;
-  }
-
-  .icon-btns{
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    display: flex;
-    gap: 6px;
-  }
-
-  .icon-btns button{
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 6px;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 0.9rem;
-    transition: 0.2s;
-  }
-
-  .icon-btns button:hover{
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:system-ui,-apple-system,BlinkMacSystemFont;
+background:#0a0a0a;color:#fff;min-height:100vh}
+.container{max-width:1100px;margin:auto;padding:2rem}
+h1{text-align:center;font-size:3rem;margin-bottom:.5rem}
+p{text-align:center;color:#aaa;margin-bottom:1.5rem}
+textarea,select,button{
+width:100%;padding:1rem;border-radius:8px;
+border:1px solid #333;background:#111;color:#fff}
+button{background:#4a9eff;font-weight:600;cursor:pointer}
+button:disabled{background:#333}
+.controls{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:1rem;margin:1rem 0}
+#status{text-align:center;margin-top:1rem;color:#4a9eff}
+.grid{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:1rem;margin-top:2rem}
+.card{background:#111;border-radius:8px;overflow:hidden}
+.card img{width:100%;height:300px;object-fit:cover}
+.info{padding:.75rem;font-size:.85rem;color:#ccc}
+</style>
 </head>
 
 <body>
-  <h1>ImagesBy.Ai Image Generator</h1>
+<div class="container">
 
-  <div class="search-box">
-    <input type="text" id="prompt" placeholder="type what you want ai to generate here...">
-    <button onclick="generateImage()"><i class="fa-solid fa-caret-right"></i></button>
-  </div>
+<h1>imagesby.ai</h1>
+<p>Fast AI image generation in your browser</p>
 
-  <div class="result-container" id="result">
-    <div class="image-wrapper" id="image-container">
-      <div class="icon-btns">
-        <button onclick="downloadImage()"><i class="fa-solid fa-download"></i></button>
-        <button onclick="deleteImage()"><i class="fa-solid fa-trash"></i></button>
-      </div>
-      <img id="generateImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/French_beans_J1.JPG/500px-French_beans_J1.JPG">
-    </div>
-  </div>
+<textarea id="prompt" placeholder="Describe your image..."></textarea>
+
+<div class="controls">
+<select id="style">
+<option value="realistic">Realistic</option>
+<option value="artistic">Artistic</option>
+<option value="cyberpunk">Cyberpunk</option>
+<option value="cartoon">Cartoon</option>
+</select>
+
+<select id="resolution">
+<option value="512x512" selected>512×512</option>
+<option value="768x768">768×768</option>
+<option value="1024x1024">1024×1024</option>
+</select>
+
+<select id="count">
+<option value="1" selected>1 Image</option>
+<option value="2">2 Images</option>
+<option value="4">4 Images</option>
+</select>
+</div>
+
+<button id="generate">Generate Images</button>
+
+<div id="status"></div>
+<div id="results" class="grid"></div>
+
+</div>
 
 <script>
-  function generateImage() {
-    const prompt = document.getElementById("prompt").value;
-    const img = document.getElementById("generateImage");
+document.addEventListener("DOMContentLoaded", () => {
 
-    if (!prompt.trim()) return alert("Please type something first!");
+const promptInput = document.getElementById("prompt");
+const results = document.getElementById("results");
+const status = document.getElementById("status");
+const button = document.getElementById("generate");
 
-    img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
-  }
+button.addEventListener("click", generateImages);
 
-  function deleteImage() {
-    const img = document.getElementById("generateImage");
-    img.src = "";
-  }
+function generateImages(){
+const prompt = promptInput.value.trim();
+if(!prompt){
+status.textContent = "Please enter a prompt.";
+return;
+}
 
-  function downloadImage() {
-    const img = document.getElementById("generateImage").src;
-    if (!img) return;
+button.disabled = true;
+status.textContent = "Generating images…";
+results.innerHTML = "";
 
-    const link = document.createElement("a");
-    link.href = img;
-    link.download = "image.png";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
+const style = document.getElementById("style").value;
+const [w,h] = document.getElementById("resolution").value.split("x");
+const count = parseInt(document.getElementById("count").value);
+
+for(let i=0;i<count;i++){
+const imgUrl =
+`https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", " + style + " style")}` +
+`?width=${w}&height=${h}&seed=${i}&nologo=true`;
+
+const card = document.createElement("div");
+card.className = "card";
+card.innerHTML = `
+<img src="${imgUrl}" loading="lazy" decoding="async">
+<div class="info">${prompt}</div>
+`;
+
+results.appendChild(card);
+}
+
+status.textContent = "Done ✔";
+button.disabled = false;
+}
+
+});
 </script>
 
 </body>
